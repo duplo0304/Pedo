@@ -7,8 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.projektarbeit.duplo.pedo.MainActivity;
 import com.projektarbeit.duplo.pedo.R;
+import com.projektarbeit.duplo.pedo.TrainingJJ;
 
 
 /**
@@ -20,11 +20,11 @@ public class SettingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.settings_layout, container, false);
-        Button button = (Button) view.findViewById(R.id.btn);
+        Button button = (Button) view.findViewById(R.id.btn_settings);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((MainActivity) getActivity()).resetCounter();
+                ((TrainingJJ) getActivity()).resetCounter();
             }
         });
         return view;

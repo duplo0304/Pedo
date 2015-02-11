@@ -16,11 +16,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * A simple fragment for showing the count
+ * A simple fragment for showing the count of Jumping Jacks
  */
 public class CounterFragment extends Fragment {
 
-    private static final long ANIMATION_INTERVAL_MS = 500; // in milliseconds
+    private static final long ANIMATION_INTERVAL_MS = 1000; // in milliseconds
     private TextView mCounterText;
     private Timer mAnimationTimer;
     private Handler mHandler;
@@ -29,19 +29,24 @@ public class CounterFragment extends Fragment {
     private Drawable mDownDrawable;
     private Drawable mUpDrawable;
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.counter_layout, container, false);
-        mDownDrawable = getResources().getDrawable(R.drawable.heart_1);
-        mUpDrawable = getResources().getDrawable(R.drawable.heart_2);
+        //mDownDrawable = getResources().getDrawable(R.drawable.heart_1);
+        //mUpDrawable = getResources().getDrawable(R.drawable.heart_2);
+        mDownDrawable = getResources().getDrawable(R.drawable.jump_down_50);
+        mUpDrawable = getResources().getDrawable(R.drawable.jump_up_50);
         mCounterText = (TextView) view.findViewById(R.id.counter);
         mCounterText.setCompoundDrawablesWithIntrinsicBounds(mUpDrawable, null, null, null);
         setCounter(Utils.getCounterFromPreference(getActivity()));
         mHandler = new Handler();
         startAnimation();
         return view;
+
     }
+
 
     private void startAnimation() {
         mAnimationTask = new TimerTask() {
@@ -75,5 +80,6 @@ public class CounterFragment extends Fragment {
         mAnimationTimer.cancel();
         super.onDetach();
     }
+
 }
 
