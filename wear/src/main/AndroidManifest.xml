@@ -68,6 +68,11 @@
             android:theme="@style/Theme" >
         </activity>
 
+        <!-- Activity: Beispiel: Sensor -->
+        <activity
+            android:name=".Sensors" >
+        </activity>
+
     </application>
 
 </manifest>

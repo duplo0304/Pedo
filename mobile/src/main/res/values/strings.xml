@@ -1,3 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Pedo</string>
+
+    <string name="app_name">Fettness</string>
+    <string name="edit_message">Gib einen Text ein</string>
+    <string name="button_send">Senden</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="title_activity_display_message">Meine Nachricht</string>
+    <string name="action_share">Teilen</string>
+    <string name="action_search">Suche</string>
+    <string name="action_refresh">Aktualisieren</string>
+    <string name="action_exit">Beenden</string>
+    <string name="title_activity_export">ExportActivity</string>
+    <string name="hello_world">Hello world!</string>
+
+
 </resources>
