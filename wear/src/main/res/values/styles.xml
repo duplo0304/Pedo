@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Eine Wischgeste von links nach rechts beendet die App normalerweise.
+In dieser XML wird genau diese Geste deaktiviert, um ein versehentliches Beenden zu unternbinden.
+Als Exit-Button wird stattdessen ein "LongPressToDismiss" verwendet.
+
+Zusätzlich zu dieser XML ist noch ein Eintrag in der AndroidManifest.xml notwendig.
+-->
+
+<resources>
+
+    <style name="Theme"
+        parent="@android:style/Theme.DeviceDefault" >
+
+        <item name="android:windowSwipeToDismiss">false</item>
+
+    </style>
+
+</resources>

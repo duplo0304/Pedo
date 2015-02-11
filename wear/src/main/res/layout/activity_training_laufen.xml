@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <!-- ermöglicht die Darstellung einer Aktivität mit mehreren Fragmenten -->
+    <android.support.v4.view.ViewPager
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000"
+        />
+
+    <!-- Darstellung der Indexpunkte unten auf der Seite -->
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/indicator_0"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/full_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+       <ImageView
+            android:id="@+id/indicator_1"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/empty_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/indicator_2"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/empty_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/indicator_3"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/empty_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/indicator_4"
+            android:layout_marginRight="5dp"
+            android:src="@drawable/empty_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+
+</RelativeLayout>
