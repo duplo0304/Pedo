@@ -16,7 +16,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class HRFragment extends Fragment {
+public class HeartRateFragment extends Fragment {
 
     private static final long ANIMATION_INTERVAL_MS = 1000; // in milliseconds
     private TextView mCounterText;
@@ -36,11 +36,13 @@ public class HRFragment extends Fragment {
         mHeart1 = getResources().getDrawable(R.drawable.heart_1);
         mHeart2 = getResources().getDrawable(R.drawable.heart_2);
 
-        mCounterText = (TextView) view.findViewById(R.id.heartrate);
+        mCounterText = (TextView) view.findViewById(R.id.HR_field_value);
         mCounterText.setCompoundDrawablesWithIntrinsicBounds(mHeart2, null, null, null);
         setCounter(Utils.getCounterFromPreference(getActivity()));
         mHandler = new Handler();
         startAnimation();
+
+
         return view;
 
     }

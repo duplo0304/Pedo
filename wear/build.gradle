@@ -25,4 +25,6 @@ dependencies {
     compile 'com.google.android.support:wearable:1.1.+'
     compile 'com.google.android.gms:play-services-wearable:6.5.+'
     compile 'com.android.support:support-v13:21.0.+'
+    compile 'com.opencsv:opencsv:3.2'
+    compile 'com.google.apis:google-api-services-fitness:v1-rev5-1.19.1'
 }

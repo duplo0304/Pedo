@@ -1,18 +1,13 @@
 package com.projektarbeit.duplo.pedo.fragments;
 
 import android.app.Fragment;
-import android.content.Intent;
-import android.hardware.Sensor;
 import android.os.Bundle;
-import android.support.wearable.activity.ConfirmationActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-
 import com.projektarbeit.duplo.pedo.R;
-import com.projektarbeit.duplo.pedo.Sensors;
 
 
 public class ExportFragment extends Fragment {
@@ -43,8 +38,8 @@ public class ExportFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // Intent start = new Intent(getActivity(), CountdownActivity.class);
-                Intent start = new Intent(getActivity(), Sensors.class);
-                startActivity(start);
+                //Intent start = new Intent(getActivity(), Sensors.class);
+                // startActivity(start);
             }
         });
         return view;

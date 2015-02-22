@@ -9,6 +9,8 @@ import android.content.SharedPreferences;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
 
+import java.util.LinkedList;
+
 /**
  * A utility class for some helper methods.
  */
@@ -51,5 +53,60 @@ public class Utils {
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
         return pref.getInt(PREF_KEY_COUNTER, 0);
     }
+
+
+
+    /**
+     * Simple Moving Average
+     */
+    public static class SMA
+    {
+        private LinkedList values = new LinkedList();
+
+        private int length;
+
+        private float sum = 0;
+
+        private float average = 0;
+
+        /**
+         *
+         * @param length the maximum length
+         */
+        public SMA(int length)
+        {
+            if (length <= 0)
+            {
+                throw new IllegalArgumentException("length must be greater than zero");
+            }
+            this.length = length;
+        }
+
+        public float currentAverage()
+        {
+            return average;
+        }
+
+        /**
+         * Compute the moving average.
+         * Synchronised so that no changes in the underlying data is made during calculation.
+         * @param value The value
+         * @return The average
+         */
+        public synchronized float compute(float value)
+        {
+            if (values.size() == length && length > 0)
+            {
+                sum -= ((Float) values.getFirst()).floatValue();
+                values.removeFirst();
+            }
+            sum += value;
+            values.addLast(new Float(value));
+            average = sum / values.size();
+            return average;
+        }
+    }
+
+
 
 }

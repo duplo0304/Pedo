@@ -5,7 +5,7 @@ Eine XML mit allen im Quellcode vorkommenden Strings
 
 <resources>
 
-    <string name="app_name">Fettness</string>
+    <string name="app_name">Rad( )aktiv</string>
     <string name="reset_counter">Reset Counter</string>
     <string name="start_training">Training beginnen!</string>
     <string name="export">Daten exportieren</string>
@@ -19,11 +19,14 @@ Eine XML mit allen im Quellcode vorkommenden Strings
     <string name="connect_sensor">Verbinde via Bluetooth...</string>
 
     <string name="hello_round">Hier kommen dann die Trainingsparameter</string>
-
+    <string name="title_activity_main">Main</string>
 
     <string name="raw_x_string">Raw X:</string>
     <string name="raw_y_string">Raw Y:</string>
     <string name="raw_z_string">Raw Z:</string>
+    <string name="sma_value">SMA:</string>
+    <string name="hr_value">HR: </string>
+
     <string name="lowpass_x_string">LowPass X</string>
     <string name="lowpass_y_string">LowPass Y:</string>
     <string name="lowpass_z_string">LowPass Z:</string>
