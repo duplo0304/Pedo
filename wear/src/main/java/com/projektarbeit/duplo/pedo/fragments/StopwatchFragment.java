@@ -15,11 +15,15 @@ public class StopwatchFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        // Keep Fragment running
+        setRetainInstance(true);
     }
 
     @Override
@@ -55,4 +59,17 @@ public class StopwatchFragment extends Fragment {
     }
 
 
+    @Override
+    public void onPause(){
+        super.onPause();
+
+
+    }
+
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
+    }
 }

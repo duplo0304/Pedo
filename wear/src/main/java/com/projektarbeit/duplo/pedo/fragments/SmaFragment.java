@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.projektarbeit.duplo.pedo.R;
 import com.projektarbeit.duplo.pedo.Utils;
 
-public class SmaFragment extends Fragment implements SensorEventListener{
+public class SmaFragment extends Fragment implements SensorEventListener {
 
     private TextView mRawX = null;
     private TextView mRawY = null;
@@ -27,8 +27,6 @@ public class SmaFragment extends Fragment implements SensorEventListener{
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
 
-    //private TextView mSMAView;
-    //private TextView mHRView;
     private long mLastUpdate;
     private static final int UPDATE_THRESHOLD = 500;
 
@@ -43,8 +41,6 @@ public class SmaFragment extends Fragment implements SensorEventListener{
         mRawZ = (TextView) view.findViewById(R.id.z_value_view);
         mSMA = (TextView) view.findViewById(R.id.sma_value_view);
 
-        //TextView mSMA = (TextView) view.findViewById(R.id.sma_value_view);
-        //TextView mHR = (TextView) view.findViewById(R.id.hr_value_view);
 
         return view;
 
@@ -62,6 +58,7 @@ public class SmaFragment extends Fragment implements SensorEventListener{
 
     }
 
+
     @Override
     public void onResume() {
         super.onResume();
@@ -72,10 +69,21 @@ public class SmaFragment extends Fragment implements SensorEventListener{
         }
     }
 
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+    }
+
+
     @Override
     public void onStop() {
         super.onStop();
         mSensorManager.unregisterListener(this);
+        //if (Log.isLoggable(TAG, Log.DEBUG)) {
+        //    Log.d(TAG, "Unregistered for sensor events");
+        //}
     }
 
     @Override
@@ -103,6 +111,40 @@ public class SmaFragment extends Fragment implements SensorEventListener{
                 sma = windowSize.compute(Math.abs(x) + Math.abs(x) + Math.abs(z));
 
                 mSMA.setText(String.valueOf(sma));
+
+                /*
+                // Logging
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                String currentDateAndTime = sdf.format(new Date());
+                Log.d("Time", currentDateAndTime);
+
+                String rawentry = String.valueOf(currentDateAndTime) + ","
+                        + String.valueOf(x) + ","
+                        + String.valueOf(y) + ","
+                        + String.valueOf(z) + ","
+                        + String.valueOf(sma);
+
+                Log.d("test", rawentry);
+
+
+
+                CSVWriter writer = null;                                                    // Permission WRITE EXTERNAL STORAGE
+                //String outputFile = "accel_sensor_data.csv";
+
+
+                try {
+                    //FileOutputStream out = openFileInput(outputFile, Context.MODE_APPEND)     // create the file, wenns noch nich da; sonst daten anhaengen
+                    //out.write( entry.getBytes() );                                          // Data aus "out" und dann in Byte umwandeln
+                    //out.close();
+                    writer = new CSVWriter(new FileWriter("/sdcard/accel_sensor_data.csv", true), ',');
+                    String[] entries = rawentry.split(","); // array of your values
+
+                    writer.writeNext(entries);
+                    writer.close();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }*/
             }
         }
     }
