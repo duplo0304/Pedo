@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.wearable.activity.ConfirmationActivity;
 import android.support.wearable.view.WearableListView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,10 +14,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class ChooseActivity extends Activity implements WearableListView.ClickListener {
+
+public class BorgScaleActivity extends Activity implements WearableListView.ClickListener  {
 
     // Sample dataset for the list
-    String[] elements = {"Laufen", "Walken", "Jumping Jacks", "Radfahren" };
+    String[] elements = {"sehr sehr leicht", "sehr leicht", "leicht", "etwas anstrengend",
+                            "anstrengend", "sehr schwer", "sehr sehr schwer" };
 
 
     @Override
@@ -26,7 +29,7 @@ public class ChooseActivity extends Activity implements WearableListView.ClickLi
 
         // Get the list component from the layout of the activity
         WearableListView listView=
-        (WearableListView)findViewById(R.id.list);
+                (WearableListView)findViewById(R.id.list);
 
         // Assign an adapter to the list
         listView.setAdapter(new Adapter(this,elements));
@@ -38,6 +41,7 @@ public class ChooseActivity extends Activity implements WearableListView.ClickLi
     }
 
 
+
     // WearableListView click listener
     @Override
     public void onClick(WearableListView.ViewHolder v) {
@@ -46,19 +50,34 @@ public class ChooseActivity extends Activity implements WearableListView.ClickLi
         switch (tag) {
 
             case 0:
-                Intent laufen = new Intent(this, TrainingLaufen.class);
-                startActivity(laufen);
+                //Toast.makeText(this, "sehr sehr leicht", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, ConfirmationActivity.class);
+                intent.putExtra(ConfirmationActivity.EXTRA_ANIMATION_TYPE,
+                        ConfirmationActivity.SUCCESS_ANIMATION);
+                intent.putExtra(ConfirmationActivity.EXTRA_MESSAGE,
+                        getString(R.string.data_exported));
+                startActivity(intent);
 
+                android.os.Process.killProcess(android.os.Process.myPid());
+                System.exit(1);
                 break;
             case 1:
-                Toast.makeText(this, "noch nicht implementiert :)", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "sehr leicht", Toast.LENGTH_SHORT).show();
                 break;
             case 2:
-                Intent jumpingjack = new Intent(this, TrainingJJ.class);
-                startActivity(jumpingjack);
+                Toast.makeText(this, "etwas anstrengend", Toast.LENGTH_SHORT).show();
                 break;
             case 3:
-                Toast.makeText(this, "Abnehmen ist immer gut!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "etwas anstrengend!", Toast.LENGTH_SHORT).show();
+                break;
+            case 4:
+                Toast.makeText(this, "anstrengend!", Toast.LENGTH_SHORT).show();
+                break;
+            case 5:
+                Toast.makeText(this, "sehr schwer!", Toast.LENGTH_SHORT).show();
+                break;
+            case 6:
+                Toast.makeText(this, "sehr sehr schwer!", Toast.LENGTH_SHORT).show();
                 break;
 
         }
@@ -66,16 +85,14 @@ public class ChooseActivity extends Activity implements WearableListView.ClickLi
 
 
     @Override
-    public void onResume(){
+    protected void onResume(){
         super.onResume();
     }
 
-
     @Override
     public void onTopEmptyRegionClick(){
-        Toast.makeText(this, "Hier oben könnte man noch irgendwas verlinken", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Wie fandest du das Training? :)", Toast.LENGTH_SHORT).show();
     }
-
 
     private static final class Adapter extends WearableListView.Adapter {
         private String[] mDataset;
@@ -104,7 +121,7 @@ public class ChooseActivity extends Activity implements WearableListView.ClickLi
         // (invoked by the WearableListView's layout manager)
         @Override
         public WearableListView.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                          int viewType) {
+                                                              int viewType) {
             // Inflate our custom layout for list items
             return new ItemViewHolder(mInflater.inflate(R.layout.chooseactivity_item_layout, null));
         }
@@ -114,7 +131,7 @@ public class ChooseActivity extends Activity implements WearableListView.ClickLi
         // (invoked by the WearableListView's layout manager)
         @Override
         public void onBindViewHolder(WearableListView.ViewHolder holder,
-                                 int position) {
+                                     int position) {
             // retrieve the text view
             ItemViewHolder itemHolder = (ItemViewHolder) holder;
             TextView view = itemHolder.textView;
@@ -131,5 +148,4 @@ public class ChooseActivity extends Activity implements WearableListView.ClickLi
             return mDataset.length;
         }
     }
-
 }

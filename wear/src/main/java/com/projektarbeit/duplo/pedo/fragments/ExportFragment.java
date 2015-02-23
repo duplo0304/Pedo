@@ -1,7 +1,9 @@
 package com.projektarbeit.duplo.pedo.fragments;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.wearable.activity.ConfirmationActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,19 @@ public class ExportFragment extends Fragment {
         /*
         View view = inflater.inflate(R.layout.export_layout, container, false);
         Button button = (Button) view.findViewById(R.id.btn_export);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent list = new Intent(getActivity(), BorgScaleActivity.class);
+                startActivity(list);
+                // startActivity(start);
+            }
+        });
+        return view;*/
+
+
+        View view = inflater.inflate(R.layout.export_layout, container, false);
+        Button button = (Button) view.findViewById(R.id.btn_export);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -28,20 +43,11 @@ public class ExportFragment extends Fragment {
                 intent.putExtra(ConfirmationActivity.EXTRA_MESSAGE,
                         getString(R.string.data_exported));
                 startActivity(intent);
-            }
-        });
-        */
 
-        View view = inflater.inflate(R.layout.export_layout, container, false);
-        Button button = (Button) view.findViewById(R.id.btn_export);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Intent start = new Intent(getActivity(), CountdownActivity.class);
-                //Intent start = new Intent(getActivity(), Sensors.class);
-                // startActivity(start);
             }
         });
+
         return view;
+
     }
 }

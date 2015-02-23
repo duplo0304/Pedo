@@ -11,14 +11,13 @@ import android.widget.Button;
 import com.projektarbeit.duplo.pedo.ChooseActivity;
 import com.projektarbeit.duplo.pedo.R;
 
-/**
- * Created by SL_duplo on 26.01.15.
- */
+
 public class StartTrainingFragment extends Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.starttraining_layout, container, false);
         Button button = (Button) view.findViewById(R.id.btn_start);
         button.setOnClickListener(new View.OnClickListener() {

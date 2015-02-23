@@ -8,9 +8,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-/**
- * Created by SL_duplo on 08.02.15.
- */
 
 public class WearableListItemLayout extends LinearLayout
         implements WearableListView.OnCenterProximityListener {

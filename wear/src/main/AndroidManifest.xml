@@ -72,9 +72,9 @@
             android:theme="@style/Theme" >
         </activity>
 
-        <!-- Activity: Beispiel: Sensor -->
+        <!-- Activity: BorgSkala -->
         <activity
-            android:name=".Sensors" >
+            android:name=".BorgScaleActivity" >
         </activity>
 
     </application>

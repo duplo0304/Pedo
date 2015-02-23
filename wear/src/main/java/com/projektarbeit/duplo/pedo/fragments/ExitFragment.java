@@ -1,12 +1,14 @@
 package com.projektarbeit.duplo.pedo.fragments;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.projektarbeit.duplo.pedo.BorgScaleActivity;
 import com.projektarbeit.duplo.pedo.R;
 
 /**
@@ -21,8 +23,12 @@ public class ExitFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Intent rating = new Intent (getActivity(), BorgScaleActivity.class);
+                startActivity(rating);
+
                 android.os.Process.killProcess(android.os.Process.myPid());
-                System.exit(1);
+                System.exit(5);
             }
         });
         return view;
