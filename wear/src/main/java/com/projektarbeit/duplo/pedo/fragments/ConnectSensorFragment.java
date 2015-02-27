@@ -9,12 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.projektarbeit.duplo.pedo.MainActivity;
 import com.projektarbeit.duplo.pedo.R;
 
-/**
- * Created by SL_duplo on 08.02.15.
- */
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 public class ConnectSensorFragment extends Fragment {
 
@@ -28,12 +27,22 @@ public class ConnectSensorFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ConfirmationActivity.class);
+
+                final Intent intent = new Intent(getActivity(), ConfirmationActivity.class);
                 intent.putExtra(ConfirmationActivity.EXTRA_ANIMATION_TYPE,
                         ConfirmationActivity.FAILURE_ANIMATION);
                 intent.putExtra(ConfirmationActivity.EXTRA_MESSAGE,
                         getString(R.string.device_not_connected));
                 startActivity(intent);
+
+                Timer t = new Timer();
+                t.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        System.exit(1);
+                    }
+                }, 3000);
+
             }
         });
         return view;

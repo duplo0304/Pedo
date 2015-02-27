@@ -16,8 +16,7 @@ import android.widget.Toast;
 public class ChooseActivity extends Activity implements WearableListView.ClickListener {
 
     // Sample dataset for the list
-    String[] elements = {"Laufen", "Walken", "Jumping Jacks", "Radfahren" };
-
+    String[] elements = {"Laufen", "Jumping Jacks", "Radfahren", "Cardio-Workout" };
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -46,16 +45,18 @@ public class ChooseActivity extends Activity implements WearableListView.ClickLi
         switch (tag) {
 
             case 0:
-                Intent laufen = new Intent(this, TrainingLaufen.class);
+                //Intent laufen = new Intent(this, TrainingLaufen.class);
+                Intent laufen = new Intent(this, CountdownActivity.class);
                 startActivity(laufen);
-
+                finish();
                 break;
             case 1:
-                Toast.makeText(this, "noch nicht implementiert :)", Toast.LENGTH_SHORT).show();
-                break;
-            case 2:
                 Intent jumpingjack = new Intent(this, TrainingJJ.class);
                 startActivity(jumpingjack);
+                finish();
+                break;
+            case 2:
+                Toast.makeText(this, "noch nicht implementiert :)", Toast.LENGTH_SHORT).show();
                 break;
             case 3:
                 Toast.makeText(this, "Abnehmen ist immer gut!", Toast.LENGTH_SHORT).show();
@@ -73,7 +74,7 @@ public class ChooseActivity extends Activity implements WearableListView.ClickLi
 
     @Override
     public void onTopEmptyRegionClick(){
-        Toast.makeText(this, "Hier oben könnte man noch irgendwas verlinken", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Wähle deine Aktivitäts aus!", Toast.LENGTH_SHORT).show();
     }
 
 

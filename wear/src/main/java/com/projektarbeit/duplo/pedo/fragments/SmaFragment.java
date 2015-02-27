@@ -28,7 +28,8 @@ public class SmaFragment extends Fragment implements SensorEventListener {
     private Sensor mAccelerometer;
 
     private long mLastUpdate;
-    private static final int UPDATE_THRESHOLD = 500;
+    //private static final int UPDATE_THRESHOLD = 500;
+    private static final int UPDATE_THRESHOLD = 1000; // jede Sekunde
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

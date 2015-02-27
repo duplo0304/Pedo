@@ -6,6 +6,7 @@ Diese XML definiert im Quellcode verwendete Farben
 <resources>
     <color name="white">#ffffff</color>
     <color name="blue">#3f51b5</color>
+    <color name="turkis">#00D6C7</color>
 
     <color name="wl_blue">#2878ff</color>
     <color name="wl_gray">#c1c1c1</color>

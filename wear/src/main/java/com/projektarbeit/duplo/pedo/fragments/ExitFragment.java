@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.projektarbeit.duplo.pedo.BorgScaleActivity;
+import com.projektarbeit.duplo.pedo.AdvancedList;
 import com.projektarbeit.duplo.pedo.R;
 
 /**
@@ -24,11 +24,10 @@ public class ExitFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Intent rating = new Intent (getActivity(), BorgScaleActivity.class);
+                Intent rating = new Intent (getActivity(), AdvancedList.class);
                 startActivity(rating);
+                getActivity().finish();
 
-                android.os.Process.killProcess(android.os.Process.myPid());
-                System.exit(5);
             }
         });
         return view;

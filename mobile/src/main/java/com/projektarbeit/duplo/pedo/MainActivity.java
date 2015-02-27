@@ -1,20 +1,18 @@
 package com.projektarbeit.duplo.pedo;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener {
 
-    public final static String EXTRA_MESSAGE = "com.wearable.duplo.myfirstapp.MESSAGE"; // Key für Intent in public Variable = good practice
+    public final static String EXTRA_MESSAGE = "com.projektarbeit.duplo.pedo.MESSAGE"; // Key für Intent in public Variable = good practice
     ImageButton imgButton;
     private static final int SETTINGS_RESULT = 1;
 
@@ -125,12 +123,12 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 Intent intent3 = new Intent(this, ExportActivity.class);
                 startActivity(intent3);
                 break;
-
-            case R.id.imageButton4:
-                Intent intent4 = new Intent(this, LoginActivity.class);
-                startActivity(intent4);
-                break;
             */
+            case R.id.imageButton4:
+                Intent los = new Intent(this, DeviceScanActivity.class);
+                startActivity(los);
+                break;
+
             default:
                 break;
         }

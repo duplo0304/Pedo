@@ -5,7 +5,7 @@ Eine XML mit allen im Quellcode vorkommenden Strings
 
 <resources>
 
-    <string name="app_name">Rad()aktiv</string>
+    <string name="app_name">Rad(I/0)aktiv</string>
     <string name="reset_counter">Zähler zurücksetzen</string>
     <string name="start_training">Training beginnen!</string>
     <string name="export">Daten exportieren</string>
@@ -18,7 +18,6 @@ Eine XML mit allen im Quellcode vorkommenden Strings
     <string name="device_not_connected"> Fehlgeschlagen :(</string>
     <string name="connect_sensor">Verbinde via Bluetooth...</string>
 
-    <string name="hello_round">Hier kommen dann die Trainingsparameter</string>
     <string name="title_activity_main">Main</string>
 
     <string name="raw_x_string">Raw X:</string>
@@ -26,6 +25,7 @@ Eine XML mit allen im Quellcode vorkommenden Strings
     <string name="raw_z_string">Raw Z:</string>
     <string name="sma_value">SMA:</string>
 
-
+    <string name="rate_info">Geschafft! :)\n\nBitte bewerte das Training</string>
+    <string name="training_done">Danke :)\n\nDas Training ist nun beendet</string>
 
 </resources>

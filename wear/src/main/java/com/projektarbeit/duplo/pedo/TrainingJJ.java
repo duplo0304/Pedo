@@ -54,6 +54,7 @@ public class TrainingJJ extends Activity implements SensorEventListener {
     private ViewPager mPager;
 
     private CounterFragment mCounterPage;
+    //private StepsFragment mStepPage;
     private SettingsFragment mSettingPage;
     private ExitFragment mExitPage;
 
@@ -88,10 +89,12 @@ public class TrainingJJ extends Activity implements SensorEventListener {
         mThirdIndicator = (ImageView) findViewById(R.id.indicator_2);
         final PagerAdapter adapter = new PagerAdapter(getFragmentManager());
         mCounterPage = new CounterFragment();
+        //mStepPage = new StepsFragment();
         mSettingPage = new SettingsFragment();
         mExitPage = new ExitFragment();
         adapter.addFragment(mCounterPage);
         adapter.addFragment(mSettingPage);
+        //adapter.addFragment(mStepPage);
         adapter.addFragment(mExitPage);
         setIndicator(0);
         mPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {

@@ -11,15 +11,9 @@
 
     <android:uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="18" />
+        android:maxSdkVersion="21"/>
 
-    <android:uses-permission
-        android:name="android.permission.READ_PHONE_STATE" />
-
-    <android:uses-permission
-        android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="18" />
-
+    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <android:uses-permission android:name="android.permission.BODY_SENSORS" />
 
@@ -50,12 +44,14 @@
         <!-- ListView für Auswahl der Aktivitaet-->
         <activity
             android:name=".ChooseActivity"
-            android:label="ChooseActivity" />
+            android:label="ChooseActivity"
+            android:parentActivityName=".MainActivity"/>
 
         <!-- Countdown von 10 abwärts, danach startet eigentliches Training -->
         <activity
             android:name=".CountdownActivity"
-            android:label="Timer" >
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme">
         </activity>
 
         <!-- Activity: Laufen -->
@@ -73,9 +69,10 @@
         </activity>
 
         <!-- Activity: BorgSkala -->
-        <activity
-            android:name=".BorgScaleActivity" >
-        </activity>
+
+        <activity android:name=".AdvancedList"
+            android:label="Advanced List"
+            android:theme="@style/Theme" />
 
     </application>
 

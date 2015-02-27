@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.wearable.view.BoxInsetLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:keepScreenOn="true">
+
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+        <android.support.wearable.view.WearableListView
+            android:id="@+id/wearable_List"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:background="@color/white">
+        </android.support.wearable.view.WearableListView>
+
+        <TextView
+            android:id="@+id/header"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:alpha="256"
+            android:gravity="bottom"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif-light"
+            android:layout_gravity="center_horizontal"
+            android:text="Geschafft!"
+            android:textColor="@color/black"/>
+
+    </FrameLayout>
+
+
+
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:background="@color/dark_blue"
+        android:id="@+id/top_layout"
+        android:keepScreenOn="true"
+        android:clickable="true">
+
+        <TextView
+            android:id="@+id/Introduction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/rate_info"
+            android:textColor="@color/white"
+            android:gravity="center"
+        />
+    </RelativeLayout>
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:background="@color/green"
+        android:id="@+id/after_training"
+        android:keepScreenOn="true"
+        android:clickable="true">
+
+        <TextView
+            android:id="@+id/training_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/training_done"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:gravity="center"
+            />
+    </RelativeLayout>
+
+</android.support.wearable.view.BoxInsetLayout>
+
+

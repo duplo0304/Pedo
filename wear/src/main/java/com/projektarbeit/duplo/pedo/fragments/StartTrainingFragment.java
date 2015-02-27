@@ -23,7 +23,6 @@ public class StartTrainingFragment extends Fragment{
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Intent start = new Intent(getActivity(), CountdownActivity.class);
                 Intent start = new Intent(getActivity(), ChooseActivity.class);
                 startActivity(start);
             }

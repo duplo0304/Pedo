@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/turkis"
+    android:id="@+id/CountdownID">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/timer"
+        android:layout_marginBottom="12sp"
+        android:layout_centerHorizontal="true"
+        android:text="Training beginnt in..."
+        android:textColor="@color/black"
+    />
+
+    <TextView
+        android:id="@+id/timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textColor="@color/white"
+        android:textSize="50dp"
+     />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+     />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/timer"
+        android:weightSum="1">
+        <Button
+            android:id="@+id/btn_timer_renew"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:text="Renew"
+            android:layout_below="@+id/timer"
+            android:layout_toLeftOf="@+id/btn_timer_skip"
+            android:layout_alignParentStart="true"
+        />
+        <Button
+            android:id="@+id/btn_timer_skip"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content"
+            android:text="Skip"
+            android:layout_below="@+id/timer"
+            android:layout_toRightOf="@+id/btn_timer_renew"
+            android:layout_alignParentStart="true"
+         />
+    </LinearLayout>
+
+</RelativeLayout>

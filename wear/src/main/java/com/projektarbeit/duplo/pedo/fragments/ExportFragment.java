@@ -17,19 +17,6 @@ public class ExportFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        /*
-        View view = inflater.inflate(R.layout.export_layout, container, false);
-        Button button = (Button) view.findViewById(R.id.btn_export);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent list = new Intent(getActivity(), BorgScaleActivity.class);
-                startActivity(list);
-                // startActivity(start);
-            }
-        });
-        return view;*/
-
 
         View view = inflater.inflate(R.layout.export_layout, container, false);
         Button button = (Button) view.findViewById(R.id.btn_export);
