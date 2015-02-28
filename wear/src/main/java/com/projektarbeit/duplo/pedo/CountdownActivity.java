@@ -33,7 +33,7 @@ public class CountdownActivity extends Activity implements View.OnClickListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_countdown);
+        setContentView(R.layout.countdown_layout);
 
         rl = (RelativeLayout) findViewById(R.id.CountdownID);
         renew = (Button) this.findViewById(R.id.btn_timer_renew);

@@ -8,6 +8,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,9 +16,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.opencsv.CSVWriter;
 import com.projektarbeit.duplo.pedo.R;
 import com.projektarbeit.duplo.pedo.TrainingLaufen;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.CountDownLatch;
@@ -65,10 +72,6 @@ public class HeartRateFragment extends Fragment implements SensorEventListener {
         accuracy = (TextView) view.findViewById(R.id.accuracy);
         mSensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
         mHeartRateSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_HEART_RATE);
-
-        /*if (mHeartRateSensor) == null {
-            Log.d(TAG, "heart rate sensor is null");
-        }*/
 
         return view;
 
@@ -124,6 +127,49 @@ public class HeartRateFragment extends Fragment implements SensorEventListener {
         } catch (InterruptedException e) {
             Log.e(TAG, e.getMessage(), e);
         }
+
+
+        // Logging
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss");
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyyMMdd_");
+        String currentDateAndTime = sdf.format(new Date());
+        String currentDate = sdfDate.format(new Date());
+        Log.d("Time", currentDateAndTime);
+
+        float hr = sensorEvent.values[0];
+        float ac = sensorEvent.accuracy;
+        String rawentry = String.valueOf(currentDateAndTime) + ","
+                + String.valueOf(hr) + ","
+                + String.valueOf(ac);
+
+        Log.d("test", rawentry);
+
+
+        try {
+            String newDirectory = "/Rad-IO-Aktiv";
+            String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
+            File myNewFolder = new File(extStorageDirectory + newDirectory);
+
+            if (!myNewFolder.exists()){
+                myNewFolder.mkdir();
+            }
+
+            String file = (currentDate + "hr_data.csv");
+
+
+            // OpenCSVWriter Library genutzt fuer Loggen von Daten
+            // FileWriter Konstruktur ist 'offen' für Anhaengen neuer Messdaten
+            CSVWriter writer = null;
+            writer = new CSVWriter(new FileWriter(extStorageDirectory + newDirectory + "/" + file , true), ',');
+            String[] entries = rawentry.split(",");
+            writer.writeNext(entries);
+            writer.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 

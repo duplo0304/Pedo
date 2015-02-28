@@ -8,12 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.projektarbeit.duplo.pedo.AdvancedList;
+import com.projektarbeit.duplo.pedo.BorgScale;
 import com.projektarbeit.duplo.pedo.R;
 
-/**
- * Created by SL_duplo on 27.01.15.
- */
+
 public class ExitFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -24,8 +22,8 @@ public class ExitFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Intent rating = new Intent (getActivity(), AdvancedList.class);
-                startActivity(rating);
+                Intent borg = new Intent (getActivity(), BorgScale.class);
+                startActivity(borg);
                 getActivity().finish();
 
             }

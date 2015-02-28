@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class AdvancedList extends Activity implements WearableListView.ClickListener  {
+public class BorgScale extends Activity implements WearableListView.ClickListener  {
 
     private static ArrayList<Integer> mListItems;
     private TextView mListHeader;
@@ -32,7 +32,7 @@ public class AdvancedList extends Activity implements WearableListView.ClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.advanced_main);
+        setContentView(R.layout.borgscale_layout);
 
         mDefaultCircleRadius = getResources().getDimension(R.dimen.default_circle_radius);
         mSelectedCircleRadius = getResources().getDimension(R.dimen.selected_circle_radius);
@@ -63,7 +63,7 @@ public class AdvancedList extends Activity implements WearableListView.ClickList
         mAdapter = new MyListAdapter();
         mListView.setAdapter(mAdapter);
 
-        mListView.setClickListener(AdvancedList.this);
+        mListView.setClickListener(BorgScale.this);
 
 
 
@@ -87,8 +87,40 @@ public class AdvancedList extends Activity implements WearableListView.ClickList
                 //Toast.makeText(this, "sehr sehr leicht", Toast.LENGTH_SHORT).show();
                 afterTrainingInfo();
                 break;
+            case 1:
+                afterTrainingInfo();
+                break;
+            case 2:
+                afterTrainingInfo();
+                break;
+            case 3:
+                afterTrainingInfo();
+                break;
+            case 4:
+                afterTrainingInfo();
+                break;
+            case 5:
+                afterTrainingInfo();
+                break;
+            case 6:
+                afterTrainingInfo();
+                break;
+            case 7:
+                afterTrainingInfo();
+                break;
+            case 8:
+                afterTrainingInfo();
+                break;
+            case 9:
+                afterTrainingInfo();
+                break;
+            case 10:
+                afterTrainingInfo();
+                break;
+            case 11:
+                afterTrainingInfo();
+                break;
             case 12:
-                //Toast.makeText(this, "sehr sehr schwer", Toast.LENGTH_SHORT).show();
                 afterTrainingInfo();
                 break;
         }
@@ -103,7 +135,7 @@ public class AdvancedList extends Activity implements WearableListView.ClickList
 
         @Override
         public WearableListView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            return new WearableListView.ViewHolder(new MyItemView(AdvancedList.this));
+            return new WearableListView.ViewHolder(new MyItemView(BorgScale.this));
         }
 
         @Override
@@ -178,7 +210,7 @@ public class AdvancedList extends Activity implements WearableListView.ClickList
 
         public MyItemView(Context context) {
             super(context);
-            View.inflate(context, R.layout.advanced_item_layout, this);
+            View.inflate(context, R.layout.borgscale_item_layout, this);
             imgView = (CircledImageView) findViewById(R.id.image);
             txtView = (TextView) findViewById(R.id.text);
 
@@ -229,13 +261,13 @@ public class AdvancedList extends Activity implements WearableListView.ClickList
 
     private void afterTrainingInfo() {
         afterTrainingLayout.setVisibility(View.VISIBLE);
-        afterTrainingLayout.setOnTouchListener(new View.OnTouchListener() {
+        /*afterTrainingLayout.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent mv) {
                 afterTrainingLayout.setVisibility(View.INVISIBLE);
                 return false;
             }
-        });
+        });*/
 
         Timer t = new Timer();
         t.schedule(new TimerTask() {

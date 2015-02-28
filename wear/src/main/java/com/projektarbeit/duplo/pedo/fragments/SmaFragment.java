@@ -8,13 +8,22 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.opencsv.CSVWriter;
 import com.projektarbeit.duplo.pedo.R;
 import com.projektarbeit.duplo.pedo.Utils;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class SmaFragment extends Fragment implements SensorEventListener {
 
@@ -28,8 +37,9 @@ public class SmaFragment extends Fragment implements SensorEventListener {
     private Sensor mAccelerometer;
 
     private long mLastUpdate;
-    //private static final int UPDATE_THRESHOLD = 500;
     private static final int UPDATE_THRESHOLD = 1000; // jede Sekunde
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,9 +63,9 @@ public class SmaFragment extends Fragment implements SensorEventListener {
         super.onCreate(savedInstanceState);
 
         parent = getActivity();
-
         mSensorManager = (SensorManager) parent.getSystemService(Context.SENSOR_SERVICE);
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+
 
     }
 
@@ -84,7 +94,6 @@ public class SmaFragment extends Fragment implements SensorEventListener {
         mSensorManager.unregisterListener(this);
         //if (Log.isLoggable(TAG, Log.DEBUG)) {
         //    Log.d(TAG, "Unregistered for sensor events");
-        //}
     }
 
     @Override
@@ -113,10 +122,12 @@ public class SmaFragment extends Fragment implements SensorEventListener {
 
                 mSMA.setText(String.valueOf(sma));
 
-                /*
+
                 // Logging
-                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss");
+                SimpleDateFormat sdfDate = new SimpleDateFormat("yyyyMMdd_");
                 String currentDateAndTime = sdf.format(new Date());
+                String currentDate = sdfDate.format(new Date());
                 Log.d("Time", currentDateAndTime);
 
                 String rawentry = String.valueOf(currentDateAndTime) + ","
@@ -128,24 +139,32 @@ public class SmaFragment extends Fragment implements SensorEventListener {
                 Log.d("test", rawentry);
 
 
-
-                CSVWriter writer = null;                                                    // Permission WRITE EXTERNAL STORAGE
-                //String outputFile = "accel_sensor_data.csv";
-
-
                 try {
-                    //FileOutputStream out = openFileInput(outputFile, Context.MODE_APPEND)     // create the file, wenns noch nich da; sonst daten anhaengen
-                    //out.write( entry.getBytes() );                                          // Data aus "out" und dann in Byte umwandeln
-                    //out.close();
-                    writer = new CSVWriter(new FileWriter("/sdcard/accel_sensor_data.csv", true), ',');
+                    String newDirectory = "/Rad-IO-Aktiv";
+                    String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
+                    File myNewFolder = new File(extStorageDirectory + newDirectory);
+
+                    if (!myNewFolder.exists()){
+                        myNewFolder.mkdir();
+                    }
+
+                    String file = (currentDate + "accel_data.csv");
+
+
+                    // OpenCSVWriter Library genutzt fuer Loggen von Daten
+                    // FileWriter Konstruktur ist 'offen' für Anhaengen neuer Messdaten
+                    CSVWriter writer = null;
+                    writer = new CSVWriter(new FileWriter(extStorageDirectory + newDirectory + "/" + file , true), ',');
+                    //String[] header = {"Date and Time", "Accel X", "Accel Y", "Accel Z", "SMA", "HR", "Accuracy", "BorgValue", "Activity"};
                     String[] entries = rawentry.split(","); // array of your values
 
+                    //writer.writeNext(header);
                     writer.writeNext(entries);
                     writer.close();
 
                 } catch (IOException e) {
                     e.printStackTrace();
-                }*/
+                }
             }
         }
     }

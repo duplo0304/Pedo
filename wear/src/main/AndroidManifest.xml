@@ -68,10 +68,9 @@
             android:theme="@style/Theme" >
         </activity>
 
-        <!-- Activity: BorgSkala -->
-
-        <activity android:name=".AdvancedList"
-            android:label="Advanced List"
+        <!-- Activity: Borg-Skala -->
+        <activity android:name=".BorgScale"
+            android:label="Borg Scale"
             android:theme="@style/Theme" />
 
     </application>

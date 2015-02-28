@@ -1,6 +1,9 @@
 package com.projektarbeit.duplo.pedo;
 
 import android.app.Activity;
+import android.hardware.Sensor;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.widget.ImageView;
@@ -8,6 +11,9 @@ import android.widget.ImageView;
 import com.projektarbeit.duplo.pedo.fragments.ExitFragment;
 import com.projektarbeit.duplo.pedo.fragments.HeartRateFragment;
 import com.projektarbeit.duplo.pedo.fragments.SmaFragment;
+
+import java.io.File;
+import java.util.List;
 
 
 public class TrainingLaufen extends Activity {
@@ -29,12 +35,39 @@ public class TrainingLaufen extends Activity {
     //private ImageView mFifthIndicator;
 
 
+    //global variables
+    public static final String file = ("data.txt");
+    public static  File myData = null;
+    public static  File myDataCollection = null;
+    public static final String DATA_COLLECTION_FILE = ("DataCollection.txt");
+    public SensorEventListener mSensorListener ;
+    public SensorManager sensorManager;
+    public List<Sensor> listSensor;
+    private Sensor mAccelerometer;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_training_laufen);
         setupViews();
+
+        /* AB HIER NEU
+        String newDirectory = "/Rad(I/O)Aktiv";
+        String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
+        File myNewFolder = new File(extStorageDirectory + newDirectory);
+        myNewFolder.mkdir();
+
+        myData = new File(extStorageDirectory + newDirectory + "/" + file);
+        try {
+            if (!myData.exists()) {
+                myData.createNewFile();
+            }
+        } catch(IOException ioExp){
+            Log.d("AndroidSensorList:", "Fehler beim Datei erzeugen");
+        }*/
+
+
     }
 
 
