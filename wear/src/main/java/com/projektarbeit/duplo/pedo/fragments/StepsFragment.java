@@ -11,10 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.projektarbeit.duplo.pedo.R;
-
+import com.projektarbeit.duplo.pedo.TrainingWorkout;
 
 
 public class StepsFragment extends Fragment implements SensorEventListener{
@@ -22,6 +21,7 @@ public class StepsFragment extends Fragment implements SensorEventListener{
     SensorManager mSensorManager;
     Sensor mStepCounter;
     TextView steps;
+    private static final String TAG = TrainingWorkout.class.getName();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,10 +29,10 @@ public class StepsFragment extends Fragment implements SensorEventListener{
         View view = inflater.inflate(R.layout.steps_layout, container, false);
 
         TextView steps = (TextView) view.findViewById(R.id.stepcount);
+        steps.setText("---");
 
         mSensorManager = (SensorManager) getActivity().getSystemService(Context.SENSOR_SERVICE);
-        //mStepDetector = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
-
+        mStepCounter = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
 
         return view;
 
@@ -41,41 +41,31 @@ public class StepsFragment extends Fragment implements SensorEventListener{
     @Override
     public void onResume() {
         super.onResume();
+        mSensorManager.registerListener(this, this.mStepCounter, mSensorManager.SENSOR_DELAY_GAME);
 
-        mStepCounter = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
-
-        if (mStepCounter != null){
-            mSensorManager.registerListener(this, mStepCounter, mSensorManager.SENSOR_DELAY_GAME);
+        /*if (mStepCounter != null){
+            mSensorManager.registerListener(this, this.mStepCounter, mSensorManager.SENSOR_DELAY_GAME);
         }
         else {
             Toast.makeText(getActivity(), "nicht verfügbar", Toast.LENGTH_SHORT).show();
-        }
+        }*/
 
     }
 
-/*
-    @Override
-    public void onPause() {
-        super.onPause();
-        activityRunning = false;
-        // if you unregister the last listener, the hardware will stop detecting step events
-//        sensorManager.unregisterListener(this);
-    } */
+
 
     @Override
     public void onSensorChanged(SensorEvent event) {
 
-        Sensor sensor = event.sensor;
-        float[] values = event.values;
-        int value = -1;
+        /*
+        if (event.sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
+            float x = event.values[0];
+            int i = (int) x;
+            steps.setText(String.valueOf(i));
+        }*/
 
-        if (values.length > 0) {
-            value = (int) values[0];
-        }
 
-        if (sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
-            steps.setText("Step Counter Detected : " + value);
-        }
+
     }
 
     @Override

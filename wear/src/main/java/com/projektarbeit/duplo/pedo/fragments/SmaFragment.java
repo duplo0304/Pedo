@@ -9,7 +9,6 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +16,13 @@ import android.widget.TextView;
 
 import com.opencsv.CSVWriter;
 import com.projektarbeit.duplo.pedo.R;
-import com.projektarbeit.duplo.pedo.Utils;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
 
 public class SmaFragment extends Fragment implements SensorEventListener {
 
@@ -101,24 +100,80 @@ public class SmaFragment extends Fragment implements SensorEventListener {
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
 
             long actualTime = System.currentTimeMillis();
+            //List<Float> collected_x_data = new ArrayList<>();
+            //List<Float> collected_y_data = new ArrayList<>();
+            //List<Float> collected_z_data = new ArrayList<>();
+            //Utils.WindowSum ws = new Utils.WindowSum();
+            LinkedList values_x = new LinkedList();
+            LinkedList values_y = new LinkedList();
+            LinkedList values_z = new LinkedList();
 
             if (actualTime - mLastUpdate > UPDATE_THRESHOLD) {
 
                 mLastUpdate = actualTime;
 
+                /*
                 float x = event.values[0];
                 float y = event.values[1];
                 float z = event.values[2];
-
-
                 mRawX.setText(String.valueOf(x));
                 mRawY.setText(String.valueOf(y));
                 mRawZ.setText(String.valueOf(z));
 
-                // Calculate the Signal Magnitude Area via Moving Average Function
+                // Berechne the Signal Magnitude Area via Moving Average Function
                 float sma;
                 Utils.SMA windowSize = new Utils.SMA(60);
                 sma = windowSize.compute(Math.abs(x) + Math.abs(x) + Math.abs(z));
+
+                mSMA.setText(String.valueOf(sma));
+                */
+
+                // Berechne Signal Magnitude Area mit Hilfe von WindowSum(float[] arr, int windowSize)
+
+                float x = event.values[0];
+                float y = event.values[1];
+                float z = event.values[2];
+
+                float sumx = 0;
+                float sumy = 0;
+                float sumz = 0;
+                float sma = 0;
+
+                if (values_x.size() < 60) {
+                    values_x.add(x);
+                    sumx += x;
+                    values_y.add(y);
+                    sumy += y;
+                    values_z.add(z);
+                    sumz += z;
+                }
+
+
+                if (values_x.size() == 60) {
+                    sma = (1/60) * (sumx + sumy + sumz);
+                }
+
+
+                if (values_x.size() > 60) {
+                    sumx -= ((Float) values_x.getFirst()).floatValue();
+                    values_x.removeFirst();
+                    sumx += x;
+                    values_x.addLast(new Float(x));
+
+                    sumy -= ((Float) values_y.getFirst()).floatValue();
+                    values_y.removeFirst();
+                    sumy += y;
+                    values_y.addLast(new Float(y));
+
+                    sumz -= ((Float) values_z.getFirst()).floatValue();
+                    values_z.removeFirst();
+                    sumx += z;
+                    values_z.addLast(new Float(z));
+
+                    sma = (1/60) * (sumx + sumy + sumz);
+                }
+
+
 
                 mSMA.setText(String.valueOf(sma));
 
@@ -128,15 +183,18 @@ public class SmaFragment extends Fragment implements SensorEventListener {
                 SimpleDateFormat sdfDate = new SimpleDateFormat("yyyyMMdd_");
                 String currentDateAndTime = sdf.format(new Date());
                 String currentDate = sdfDate.format(new Date());
-                Log.d("Time", currentDateAndTime);
+                //Log.d("Time", currentDateAndTime);
 
                 String rawentry = String.valueOf(currentDateAndTime) + ","
                         + String.valueOf(x) + ","
                         + String.valueOf(y) + ","
                         + String.valueOf(z) + ","
+                        + String.valueOf(sumx) + ","
+                        + String.valueOf(sumy) + ","
+                        + String.valueOf(sumz) + ","
                         + String.valueOf(sma);
 
-                Log.d("test", rawentry);
+                //Log.d("test", rawentry);
 
 
                 try {

@@ -10,13 +10,14 @@ Eine XML mit allen im Quellcode vorkommenden Strings
     <string name="start_training">Training beginnen!</string>
     <string name="export">Daten exportieren</string>
     <string name="exit">Verlassen</string>
+    <string name="device_not_connected"> Fehlgeschlagen :(</string>
+    <string name="connect_sensor">Verbinde via Bluetooth...</string>
 
     <string name="title_training_laufen">Laufen</string>
     <string name="title_training_jj">Jumping Jacks</string>
-    <string name="long_press_intro">Lange Drücken zum Beenden der App</string>
+    <string name="title_training_workout">Workuout</string>
+
     <string name="data_exported">Erledigt :)</string>
-    <string name="device_not_connected"> Fehlgeschlagen :(</string>
-    <string name="connect_sensor">Verbinde via Bluetooth...</string>
 
     <string name="title_activity_main">Main</string>
 

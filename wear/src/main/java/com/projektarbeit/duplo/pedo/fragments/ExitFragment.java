@@ -12,6 +12,7 @@ import com.projektarbeit.duplo.pedo.BorgScale;
 import com.projektarbeit.duplo.pedo.R;
 
 
+
 public class ExitFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

@@ -9,8 +9,6 @@ import android.content.SharedPreferences;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
 
-import java.util.LinkedList;
-
 /**
  * A utility class for some helper methods.
  */
@@ -59,6 +57,7 @@ public class Utils {
     /**
      * Simple Moving Average
      */
+/*
     public static class SMA
     {
         private LinkedList values = new LinkedList();
@@ -67,33 +66,28 @@ public class Utils {
 
         private float sum = 0;
 
-        private float average = 0;
 
         /**
          *
          * @param length the maximum length
          */
-        public SMA(int length)
+/*        public SMA(int length)
         {
-            if (length <= 0)
+            if (length <= 59)
             {
-                throw new IllegalArgumentException("length must be greater than zero");
+                throw new IllegalArgumentException("SMA wird ueber Zeitraum von 60 Sek berechnet");
             }
             this.length = length;
         }
 
-        public float currentAverage()
-        {
-            return average;
-        }
 
         /**
          * Compute the moving average.
          * Synchronised so that no changes in the underlying data is made during calculation.
          * @param value The value
-         * @return The average
+         * @return The sum
          */
-        public synchronized float compute(float value)
+/*        public synchronized float compute(float value)
         {
             if (values.size() == length && length > 0)
             {
@@ -102,11 +96,30 @@ public class Utils {
             }
             sum += value;
             values.addLast(new Float(value));
-            average = sum / values.size();
-            return average;
+            return sum;
         }
     }
 
 
+    /**
+     * WindowSum berechnet die Summe aus den Zahlen innerhalb der gewählten Fenstergröße
+     */
+
+/*    public static class WindowSum {
+        public static int[] windowSum(int[] arr, int windowSize) {
+            int[] sum = new int[arr.length - windowSize+1];
+            int current = 0;
+            for (int i = 0; i < windowSize; i++){
+                sum[i] = current + arr[i+windowSize-1] - arr[i-1];
+                current = sum[i];
+            }
+            return sum;
+        }
+
+    }
+
+
+
+*/
 
 }

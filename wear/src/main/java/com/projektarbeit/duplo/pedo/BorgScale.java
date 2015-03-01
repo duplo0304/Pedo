@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.support.wearable.view.CircledImageView;
 import android.support.wearable.view.WearableListView;
 import android.view.MotionEvent;
@@ -13,9 +15,18 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.opencsv.CSVWriter;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
+
+//import android.util.Log;
 
 public class BorgScale extends Activity implements WearableListView.ClickListener  {
 
@@ -82,45 +93,354 @@ public class BorgScale extends Activity implements WearableListView.ClickListene
     public void onClick(WearableListView.ViewHolder viewHolder) {
         //Toast.makeText(this, String.format("You selected item #%s", viewHolder.getPosition()+1), Toast.LENGTH_SHORT).show();
         int a = viewHolder.getPosition();
+
+        // Speichert den angewählten Borg-Skalen Wert in den SharedPrefs zwischen
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt("borg", a);
+        editor.commit();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss");
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyyMMdd_");
+        String currentDate = sdfDate.format(new Date());
+
+        String startTime = pref.getString("time", "null");
+        String endTime = sdf.format(new Date());
+        int borg = 7+ pref.getInt("borg", 1337);
+        int activity = pref.getInt("activity", 1337);
+
+        String rawentry = String.valueOf(startTime) + ","
+                + String.valueOf(endTime) + ","
+                + String.valueOf(activity) + ","
+                + String.valueOf(borg);
+        CSVWriter writer = null;
+
+
         switch(a) {
             case 0:
-                //Toast.makeText(this, "sehr sehr leicht", Toast.LENGTH_SHORT).show();
+
+                try {
+                    String newDirectory = "/Rad-IO-Aktiv";
+                    String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
+                    File myNewFolder = new File(extStorageDirectory + newDirectory);
+
+                    if (!myNewFolder.exists()){
+                        myNewFolder.mkdir();
+                    }
+
+                                      String file = (currentDate + "info_data.csv");
+                    writer = new CSVWriter(new FileWriter(extStorageDirectory + newDirectory + "/" + file , true), ',');
+                    String[] header = {"Starzeit", "Endzeit", "Art der Aktivität", "Borg-Skala Wert"};
+                    String[] entries = rawentry.split(","); // array of your values
+
+                    writer.writeNext(header);
+                    writer.writeNext(entries);
+                    writer.close();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
                 afterTrainingInfo();
                 break;
             case 1:
+
+                try {
+                    String newDirectory = "/Rad-IO-Aktiv";
+                    String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
+                    File myNewFolder = new File(extStorageDirectory + newDirectory);
+
+                    if (!myNewFolder.exists()){
+                        myNewFolder.mkdir();
+                    }
+
+                    String file = (currentDate + "info_data.csv");
+                    writer = new CSVWriter(new FileWriter(extStorageDirectory + newDirectory + "/" + file , true), ',');
+                    String[] header = {"Starzeit", "Endzeit", "Art der Aktivität", "Borg-Skala Wert"};
+                    String[] entries = rawentry.split(","); // array of your values
+
+                    writer.writeNext(header);
+                    writer.writeNext(entries);
+                    writer.close();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 afterTrainingInfo();
                 break;
             case 2:
+
+                try {
+                    String newDirectory = "/Rad-IO-Aktiv";
+                    String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
+                    File myNewFolder = new File(extStorageDirectory + newDirectory);
+
+                    if (!myNewFolder.exists()){
+                        myNewFolder.mkdir();
+                    }
+
+                    String file = (currentDate + "info_data.csv");
+                    writer = new CSVWriter(new FileWriter(extStorageDirectory + newDirectory + "/" + file , true), ',');
+                    String[] header = {"Starzeit", "Endzeit", "Art der Aktivität", "Borg-Skala Wert"};
+                    String[] entries = rawentry.split(","); // array of your values
+
+                    writer.writeNext(header);
+                    writer.writeNext(entries);
+                    writer.close();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 afterTrainingInfo();
                 break;
             case 3:
+
+                try {
+                    String newDirectory = "/Rad-IO-Aktiv";
+                    String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
+                    File myNewFolder = new File(extStorageDirectory + newDirectory);
+
+                    if (!myNewFolder.exists()){
+                        myNewFolder.mkdir();
+                    }
+
+                    String file = (currentDate + "info_data.csv");
+                    writer = new CSVWriter(new FileWriter(extStorageDirectory + newDirectory + "/" + file , true), ',');
+                    String[] header = {"Starzeit", "Endzeit", "Art der Aktivität", "Borg-Skala Wert"};
+                    String[] entries = rawentry.split(","); // array of your values
+
+                    writer.writeNext(header);
+                    writer.writeNext(entries);
+                    writer.close();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 afterTrainingInfo();
                 break;
             case 4:
+
+                try {
+                    String newDirectory = "/Rad-IO-Aktiv";
+                    String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
+                    File myNewFolder = new File(extStorageDirectory + newDirectory);
+
+                    if (!myNewFolder.exists()){
+                        myNewFolder.mkdir();
+                    }
+
+                    String file = (currentDate + "info_data.csv");
+                    writer = new CSVWriter(new FileWriter(extStorageDirectory + newDirectory + "/" + file , true), ',');
+                    String[] header = {"Starzeit", "Endzeit", "Art der Aktivität", "Borg-Skala Wert"};
+                    String[] entries = rawentry.split(","); // array of your values
+
+                    writer.writeNext(header);
+                    writer.writeNext(entries);
+                    writer.close();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 afterTrainingInfo();
                 break;
             case 5:
+
+                try {
+                    String newDirectory = "/Rad-IO-Aktiv";
+                    String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
+                    File myNewFolder = new File(extStorageDirectory + newDirectory);
+
+                    if (!myNewFolder.exists()){
+                        myNewFolder.mkdir();
+                    }
+
+                    String file = (currentDate + "info_data.csv");
+                    writer = new CSVWriter(new FileWriter(extStorageDirectory + newDirectory + "/" + file , true), ',');
+                    String[] header = {"Starzeit", "Endzeit", "Art der Aktivität", "Borg-Skala Wert"};
+                    String[] entries = rawentry.split(","); // array of your values
+
+                    writer.writeNext(header);
+                    writer.writeNext(entries);
+                    writer.close();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 afterTrainingInfo();
                 break;
             case 6:
+
+                try {
+                    String newDirectory = "/Rad-IO-Aktiv";
+                    String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
+                    File myNewFolder = new File(extStorageDirectory + newDirectory);
+
+                    if (!myNewFolder.exists()){
+                        myNewFolder.mkdir();
+                    }
+
+                    String file = (currentDate + "info_data.csv");
+                    writer = new CSVWriter(new FileWriter(extStorageDirectory + newDirectory + "/" + file , true), ',');
+                    String[] header = {"Starzeit", "Endzeit", "Art der Aktivität", "Borg-Skala Wert"};
+                    String[] entries = rawentry.split(","); // array of your values
+
+                    writer.writeNext(header);
+                    writer.writeNext(entries);
+                    writer.close();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 afterTrainingInfo();
                 break;
             case 7:
+
+                try {
+                    String newDirectory = "/Rad-IO-Aktiv";
+                    String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
+                    File myNewFolder = new File(extStorageDirectory + newDirectory);
+
+                    if (!myNewFolder.exists()){
+                        myNewFolder.mkdir();
+                    }
+
+                    String file = (currentDate + "info_data.csv");
+                    writer = new CSVWriter(new FileWriter(extStorageDirectory + newDirectory + "/" + file , true), ',');
+                    String[] header = {"Starzeit", "Endzeit", "Art der Aktivität", "Borg-Skala Wert"};
+                    String[] entries = rawentry.split(","); // array of your values
+
+                    writer.writeNext(header);
+                    writer.writeNext(entries);
+                    writer.close();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 afterTrainingInfo();
                 break;
             case 8:
+
+                try {
+                    String newDirectory = "/Rad-IO-Aktiv";
+                    String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
+                    File myNewFolder = new File(extStorageDirectory + newDirectory);
+
+                    if (!myNewFolder.exists()){
+                        myNewFolder.mkdir();
+                    }
+
+                    String file = (currentDate + "info_data.csv");
+                    writer = new CSVWriter(new FileWriter(extStorageDirectory + newDirectory + "/" + file , true), ',');
+                    String[] header = {"Starzeit", "Endzeit", "Art der Aktivität", "Borg-Skala Wert"};
+                    String[] entries = rawentry.split(","); // array of your values
+
+                    writer.writeNext(header);
+                    writer.writeNext(entries);
+                    writer.close();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 afterTrainingInfo();
                 break;
             case 9:
+
+                try {
+                    String newDirectory = "/Rad-IO-Aktiv";
+                    String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
+                    File myNewFolder = new File(extStorageDirectory + newDirectory);
+
+                    if (!myNewFolder.exists()){
+                        myNewFolder.mkdir();
+                    }
+
+                    String file = (currentDate + "info_data.csv");
+                    writer = new CSVWriter(new FileWriter(extStorageDirectory + newDirectory + "/" + file , true), ',');
+                    String[] header = {"Starzeit", "Endzeit", "Art der Aktivität", "Borg-Skala Wert"};
+                    String[] entries = rawentry.split(","); // array of your values
+
+                    writer.writeNext(header);
+                    writer.writeNext(entries);
+                    writer.close();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 afterTrainingInfo();
                 break;
             case 10:
+
+                try {
+                    String newDirectory = "/Rad-IO-Aktiv";
+                    String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
+                    File myNewFolder = new File(extStorageDirectory + newDirectory);
+
+                    if (!myNewFolder.exists()){
+                        myNewFolder.mkdir();
+                    }
+
+                    String file = (currentDate + "info_data.csv");
+                    writer = new CSVWriter(new FileWriter(extStorageDirectory + newDirectory + "/" + file , true), ',');
+                    String[] header = {"Starzeit", "Endzeit", "Art der Aktivität", "Borg-Skala Wert"};
+                    String[] entries = rawentry.split(","); // array of your values
+
+                    writer.writeNext(header);
+                    writer.writeNext(entries);
+                    writer.close();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 afterTrainingInfo();
                 break;
             case 11:
+
+                try {
+                    String newDirectory = "/Rad-IO-Aktiv";
+                    String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
+                    File myNewFolder = new File(extStorageDirectory + newDirectory);
+
+                    if (!myNewFolder.exists()){
+                        myNewFolder.mkdir();
+                    }
+
+                    String file = (currentDate + "info_data.csv");
+                    writer = new CSVWriter(new FileWriter(extStorageDirectory + newDirectory + "/" + file , true), ',');
+                    String[] header = {"Starzeit", "Endzeit", "Art der Aktivität", "Borg-Skala Wert"};
+                    String[] entries = rawentry.split(","); // array of your values
+
+                    writer.writeNext(header);
+                    writer.writeNext(entries);
+                    writer.close();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 afterTrainingInfo();
                 break;
             case 12:
+
+                try {
+                    String newDirectory = "/Rad-IO-Aktiv";
+                    String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
+                    File myNewFolder = new File(extStorageDirectory + newDirectory);
+
+                    if (!myNewFolder.exists()){
+                        myNewFolder.mkdir();
+                    }
+
+                    String file = (currentDate + "info_data.csv");
+                    writer = new CSVWriter(new FileWriter(extStorageDirectory + newDirectory + "/" + file , true), ',');
+                    String[] header = {"Starzeit", "Endzeit", "Art der Aktivität", "Borg-Skala Wert"};
+                    String[] entries = rawentry.split(","); // array of your values
+
+                    writer.writeNext(header);
+                    writer.writeNext(entries);
+                    writer.close();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 afterTrainingInfo();
                 break;
         }

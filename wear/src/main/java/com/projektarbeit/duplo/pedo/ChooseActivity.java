@@ -4,7 +4,9 @@ package com.projektarbeit.duplo.pedo;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.wearable.view.WearableListView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +44,12 @@ public class ChooseActivity extends Activity implements WearableListView.ClickLi
     public void onClick(WearableListView.ViewHolder v) {
         Integer tag = (Integer) v.itemView.getTag();
 
+        // Speichert auswählte Aktivität in den SharedPrefs zwischen
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt("activity", tag);
+        editor.commit();
+
         switch (tag) {
 
             case 0:
@@ -59,7 +67,9 @@ public class ChooseActivity extends Activity implements WearableListView.ClickLi
                 Toast.makeText(this, "noch nicht implementiert :)", Toast.LENGTH_SHORT).show();
                 break;
             case 3:
-                Toast.makeText(this, "Abnehmen ist immer gut!", Toast.LENGTH_SHORT).show();
+                Intent workout = new Intent(this, TrainingWorkout.class);
+                startActivity(workout);
+                finish();
                 break;
 
         }
