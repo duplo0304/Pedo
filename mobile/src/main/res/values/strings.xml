@@ -1,40 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Rad( )aktiv</string>
-    <string name="title_activity_main">Rad( )aktiv</string>
+    <string name="app_name">Rad(I/O)aktiv</string>
+    <string name="title_activity_main">Rad(I/O)aktiv</string>
     <string name="edit_message">Gib einen Text ein</string>
     <string name="button_send">Senden</string>
     <string name="action_settings">Einstellungen</string>
-    <string name="title_activity_display_message">Meine Nachricht</string>
     <string name="action_share">Teilen</string>
     <string name="action_search">Suche</string>
     <string name="action_refresh">Aktualisieren</string>
     <string name="action_exit">Beenden</string>
     <string name="title_activity_export">ExportActivity</string>
+    <string name="title_activity_main_activity2">MainActivity2</string>
     <string name="hello_world">Hello world!</string>
-
-
-    <string name="ble_not_supported">BLE is not supported</string>
-    <string name="label_data">Data:</string>
-    <string name="label_device_address">Device address:</string>
-    <string name="label_state">State:</string>
-    <string name="no_data">No data</string>
-    <string name="connected">Connected</string>
-    <string name="disconnected">Disconnected</string>
-    <string name="title_devices">BLE Device Scan</string>
-    <string name="error_bluetooth_not_supported">Bluetooth not supported.</string>
-
-    <string name="unknown_device">Unknown device</string>
-    <string name="unknown_characteristic">Unknown characteristic</string>
-    <string name="unknown_service">Unknown service</string>
-    <string name="intro_message">Intro Message</string>
-
-    <!-- Menu items -->
-    <string name="menu_connect">Connect</string>
-    <string name="menu_disconnect">Disconnect</string>
-    <string name="menu_scan">Scan</string>
-    <string name="menu_stop">Stop</string>
-
 
 </resources>

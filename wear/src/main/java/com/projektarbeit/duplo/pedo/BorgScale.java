@@ -28,6 +28,14 @@ import java.util.TimerTask;
 
 //import android.util.Log;
 
+
+/**********************************************************************************************
+ *  Activity zur Bewertung des subjektiven Empfindens nach der Trainingseinheit.
+ *  Bewertung erfolgt nach Borg-RPE-Skala
+ *
+ *  Darstellung der Activity als AdvancedWearableListView
+ *********************************************************************************************/
+
 public class BorgScale extends Activity implements WearableListView.ClickListener  {
 
     private static ArrayList<Integer> mListItems;
@@ -48,7 +56,7 @@ public class BorgScale extends Activity implements WearableListView.ClickListene
         mDefaultCircleRadius = getResources().getDimension(R.dimen.default_circle_radius);
         mSelectedCircleRadius = getResources().getDimension(R.dimen.selected_circle_radius);
 
-        // Sample image set for the list
+        // 15 Bilder für die 15 Stufen der Borg-RPE-Skala
         mListItems = new ArrayList<Integer>();
         mListItems.add(R.drawable.borg_0);
         mListItems.add(R.drawable.borg_0);
@@ -64,13 +72,10 @@ public class BorgScale extends Activity implements WearableListView.ClickListene
         mListItems.add(R.drawable.borg_3);
         mListItems.add(R.drawable.borg_3);
 
-        // This is our list header
         mListHeader = (TextView) findViewById(R.id.header);
-
-        // Get the list component from the layout of the activity
         mListView = (WearableListView) findViewById(R.id.wearable_List);
 
-        // Assign an adapter to the list
+        // Zuweisen eines Adapters zu der Liste
         mAdapter = new MyListAdapter();
         mListView.setAdapter(mAdapter);
 
@@ -89,6 +94,14 @@ public class BorgScale extends Activity implements WearableListView.ClickListene
         afterTrainingLayout.setVisibility(View.INVISIBLE);
     }
 
+    /**********************************************************************************************
+     *  onClick-Methode, die folgende Dinge einleitet:
+     *  - Auswahl des entsprechenden Borg-RPE-Wertes
+     *  - Speichern dieser Auswahl in die SharedPreferences
+     *  - Erzeugen einer %TIMESTEMP%_info_data.csv-Datei, in der Startzeit, Endzeit,
+     *      Art des Trainings und Borg-Wert gespeichert sind.
+     *  @param viewHolder
+     *********************************************************************************************/
     @Override
     public void onClick(WearableListView.ViewHolder viewHolder) {
         //Toast.makeText(this, String.format("You selected item #%s", viewHolder.getPosition()+1), Toast.LENGTH_SHORT).show();
@@ -451,6 +464,11 @@ public class BorgScale extends Activity implements WearableListView.ClickListene
         Toast.makeText(this, "Wie fandest du das Training?", Toast.LENGTH_SHORT).show();
     }
 
+
+    /**********************************************************************************************
+     * Adapter Klasse verbindet Activity mit der WearableListView-Klasse
+     *********************************************************************************************/
+
     public class MyListAdapter extends WearableListView.Adapter {
 
         @Override
@@ -521,9 +539,10 @@ public class BorgScale extends Activity implements WearableListView.ClickListene
     }
 
     /*********************************************************************************
-     *
+     *  Klasse: hier werden die einzelnen Listenelemente (Bild und Text) definiert
      *********************************************************************************/
-    private final class MyItemView extends FrameLayout implements WearableListView.OnCenterProximityListener {
+    private final class MyItemView extends FrameLayout
+                                   implements WearableListView.OnCenterProximityListener {
 
         final CircledImageView imgView;
         final TextView txtView;
@@ -537,10 +556,17 @@ public class BorgScale extends Activity implements WearableListView.ClickListene
         }
 
 
+        /****************************************************************************************
+         *  Methoden für Animation von selektierten Listen-Items
+         *  onCenterPosition() --> selektiertes Element wird vergroessert
+         *                          und nicht transparent (alpha = 1)
+         *  onNonCenterPosition() --> nicht selektierte Elemente werden auf 70% verkleinert
+         *                          und 70% transparent gesetzt
+         *  @param b
+         ****************************************************************************************/
         @Override
         public void onCenterPosition(boolean b) {
 
-            //Animation example to be ran when the view becomes the centered one
             imgView.animate().scaleX(1f).scaleY(1f).alpha(1f);
             txtView.animate().scaleX(1f).scaleY(1f).alpha(1);
 
@@ -549,7 +575,6 @@ public class BorgScale extends Activity implements WearableListView.ClickListene
         @Override
         public void onNonCenterPosition(boolean b) {
 
-            //Animation example to be ran when the view is not the centered one anymore
             imgView.animate().scaleX(0.7f).scaleY(0.7f).alpha(0.7f);
             txtView.animate().scaleX(0.7f).scaleY(0.7f).alpha(0.7f);
 
@@ -557,7 +582,11 @@ public class BorgScale extends Activity implements WearableListView.ClickListene
     }
 
     /*********************************************************************************
-     *
+     *  Hilfsmethode:
+     *  - überprüft, ob App das erste Mal ausgeführt wurde
+     *  - wenn ja, wird Overlay angezeigt, dass dem User sagt, dass er sein Training
+     *      bewerten soll
+     *  - isFirstTime() arbeitet mit SharedPreferenes
      *********************************************************************************/
     private boolean isFirstTime() {
         SharedPreferences pref = getPreferences(MODE_PRIVATE);
@@ -579,6 +608,10 @@ public class BorgScale extends Activity implements WearableListView.ClickListene
         return ranBefore;
     }
 
+    /*************************************************************************************
+     *  Methode, die nach dem Training ein verstecktes Layout für 3 Sekunden wieder
+     *  sichtbar macht und so dem User visualisiert, dass das Training vorbei ist
+     *************************************************************************************/
     private void afterTrainingInfo() {
         afterTrainingLayout.setVisibility(View.VISIBLE);
         /*afterTrainingLayout.setOnTouchListener(new View.OnTouchListener() {

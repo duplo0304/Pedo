@@ -1,20 +1,33 @@
 package com.projektarbeit.duplo.pedo;
 
-import android.content.Intent;
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 
-public class MainActivity extends ActionBarActivity implements View.OnClickListener {
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
+
+public class MainActivity extends Activity implements View.OnClickListener {
 
     public final static String EXTRA_MESSAGE = "com.projektarbeit.duplo.pedo.MESSAGE"; // Key für Intent in public Variable = good practice
-    ImageButton imgButton;
-    private static final int SETTINGS_RESULT = 1;
+
 
 
     @Override
@@ -22,111 +35,64 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ImageButton btn1 = (ImageButton)findViewById(R.id.imageButton1);
+        ImageButton btn1 = (ImageButton)findViewById(R.id.btn_export);
         btn1.setOnClickListener(this);
 
-        ImageButton btn2 = (ImageButton)findViewById(R.id.imageButton2);
+        ImageButton btn2 = (ImageButton)findViewById(R.id.btn_exit);
         btn2.setOnClickListener(this);
 
-        ImageButton btn3 = (ImageButton)findViewById(R.id.imageButton3);
-        btn3.setOnClickListener(this);
+        HttpClient httpclient = new DefaultHttpClient();
+        HttpPost httppost = new HttpPost("http://www.mh-hannover.de/erad/script.php");
 
-        ImageButton btn4 = (ImageButton)findViewById(R.id.imageButton4);
-        btn4.setOnClickListener(this);
 
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        switch (item.getItemId()) {
-            /*
-            case R.id.action_search:
+        int id = item.getItemId();
 
-                //openSearch();
-                Toast.makeText(this, "Suche wurde ausgewählt", Toast.LENGTH_SHORT).show();
-                return true;
-
-            case R.id.action_refresh:
-                //openRefresh();
-                Toast.makeText(this,"Aktualisieren wurde ausgewählt", Toast.LENGTH_SHORT).show();
-                return true;
-
-            case R.id.action_settings:
-                //openSettings();
-                Toast.makeText(this,"Einstellungen wurde ausgewählt", Toast.LENGTH_SHORT).show();
-                return true;
-
-             */
-            case R.id.action_exit:
-                System.exit(0);
-
-            default:
-                return super.onOptionsItemSelected(item);
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
         }
+
+        return super.onOptionsItemSelected(item);
     }
 
 
-    /** Wird aufgerufen, wenn User den 'Senden' Button drückt **/
-    /*
-    public void sendMessage(View view){
-        Intent intent = new Intent(this, DisplayMessageActivity.class); //(Context, da-soll-System-den-Intent-Hinschicken
-        EditText editText = (EditText) findViewById(R.id.edit_message); // Inhalt des Wertes bekommen
 
-        if (editText.getText().toString().trim().length()==0){
-            // überprüft, ob Eingabe leer ist; falls ja nicht weiter & Toast geworfen
-            Context context = getApplicationContext();
-            CharSequence text = " Feld darf nicht leer sein";
-            int duration = Toast.LENGTH_SHORT;
-
-            Toast toast = Toast.makeText(context,text, duration);
-            toast.show();
-        }
-
-        else {
-            String message = editText.getText().toString(); //lokale Variable 'Message" zum Speichern des String
-            intent.putExtra(EXTRA_MESSAGE, message); //putExtra zum Anhängen des Textwerts an Intent
-            startActivity(intent);
-        }
-
-    } */
 
     @Override
     public void onClick(View v) {
         Toast pieceToast=null;
 
         switch(v.getId()){
-            case R.id.imageButton1:
-                pieceToast= Toast.makeText(getApplicationContext(), "Image Button One Clicked", Toast.LENGTH_SHORT);
+            case R.id.btn_export:
+                pieceToast= Toast.makeText(getApplicationContext(), "Daten werden versendet", Toast.LENGTH_SHORT);
                 pieceToast.show();
+                // postData();
                 break;
 
-            case R.id.imageButton2:
-                pieceToast= Toast.makeText(getApplicationContext(), "Image Button Two Clicked", Toast.LENGTH_SHORT);
+            case R.id.btn_exit:
+                pieceToast= Toast.makeText(getApplicationContext(), "Auf Wiedersehen :)", Toast.LENGTH_SHORT);
                 pieceToast.show();
-                break;
-
-            /*
-            // öffnet Export-View
-            case R.id.imageButton3:
-                Intent intent3 = new Intent(this, ExportActivity.class);
-                startActivity(intent3);
-                break;
-            */
-            case R.id.imageButton4:
-                Intent los = new Intent(this, DeviceScanActivity.class);
-                startActivity(los);
+                Timer t = new Timer();
+                t.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        finish();
+                    }
+                }, 3000);
                 break;
 
             default:
@@ -134,5 +100,30 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         }
     }
 
+
+
+
+    public void postData() {
+        // Erstelle neuen HttpClient und Post Header
+        HttpClient httpclient = new DefaultHttpClient();
+        HttpPost httppost = new HttpPost("http://www.mh-hannover.de/erad/script.php");
+
+        try {
+            // Daten hinzufügen
+            List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+            nameValuePairs.add(new BasicNameValuePair("id", "12345"));
+            nameValuePairs.add(new BasicNameValuePair("stringdata", "Hi"));
+            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+            // Ausführen des HTTP Post Request
+            HttpResponse response = httpclient.execute(httppost);
+
+        } catch (ClientProtocolException e) {
+            throw new AssertionError("Client Protocol Error");
+
+        } catch (IOException e) {
+            Toast.makeText(this, e.toString(), Toast.LENGTH_SHORT).show() ;
+        }
+    }
 
 }

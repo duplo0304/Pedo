@@ -10,7 +10,9 @@ import com.projektarbeit.duplo.pedo.fragments.ConnectSensorFragment;
 import com.projektarbeit.duplo.pedo.fragments.ExportFragment;
 import com.projektarbeit.duplo.pedo.fragments.StartTrainingFragment;
 
-
+/********************************************************************************************
+ *  Hauptklasse. Repräsentiert das Hauptmenue von Rad(I/O)Aktiv
+ *******************************************************************************************/
 
 public class MainActivity extends Activity {
 
@@ -33,7 +35,11 @@ public class MainActivity extends Activity {
     }
 
 
-
+    /*******************************************************************************************
+     *  Generiert die Sichten, indem...
+     *  --> einzelne Fragments werden zur MainActivity hinzugefügt.
+     *  --> Fragments werden den Page-Indikatoren zugeordnet.
+     *******************************************************************************************/
     private void setupViews() {
         mPager = (ViewPager) findViewById(R.id.pager);
         mFirstIndicator = (ImageView) findViewById(R.id.indicator_0);
@@ -68,9 +74,10 @@ public class MainActivity extends Activity {
     }
 
 
-    /**
-     * Sets the page indicator for the ViewPager.
-     */
+    /*******************************************************************************************
+     *  Setzt den Page-Indikator für den ViewPager.
+     *  Sichtbar unten als Navigationsleiste.
+     *******************************************************************************************/
     private void setIndicator(int i) {
         switch (i) {
             case 0:

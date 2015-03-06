@@ -14,10 +14,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**********************************************************************************************
+ *  Activity zur Auswahl der Art des Trainings.
+ *  Unterscheidung in Laufen, Jumping Jacks, Radfahren und Cardio-Workout
+ *********************************************************************************************/
 
 public class ChooseActivity extends Activity implements WearableListView.ClickListener {
 
-    // Sample dataset for the list
+    // Beispieldatensatz: Elemente, die in der Liste angezeigt werden sollen
     String[] elements = {"Laufen", "Jumping Jacks", "Radfahren", "Cardio-Workout" };
 
     @Override
@@ -25,21 +29,23 @@ public class ChooseActivity extends Activity implements WearableListView.ClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chooseactivity_layout);
 
-        // Get the list component from the layout of the activity
-        WearableListView listView=
-        (WearableListView)findViewById(R.id.list);
+        // Finden der Listen-Komponente per ID in entsprechender XML-Layout-File
+        WearableListView listView= (WearableListView)findViewById(R.id.list);
 
-        // Assign an adapter to the list
+        // Zuweisung eines Adapters an die Liste
         listView.setAdapter(new Adapter(this,elements));
 
-        // Set a click listener
+        // Setzen von ClickListener
         listView.setClickListener(this);
 
 
     }
 
 
-    // WearableListView click listener
+    /**********************************************************************************************
+     * WearableListView ClickListener
+     * @param v
+     *********************************************************************************************/
     @Override
     public void onClick(WearableListView.ViewHolder v) {
         Integer tag = (Integer) v.itemView.getTag();
@@ -53,7 +59,6 @@ public class ChooseActivity extends Activity implements WearableListView.ClickLi
         switch (tag) {
 
             case 0:
-                //Intent laufen = new Intent(this, TrainingLaufen.class);
                 Intent laufen = new Intent(this, CountdownActivity.class);
                 startActivity(laufen);
                 finish();
@@ -82,61 +87,80 @@ public class ChooseActivity extends Activity implements WearableListView.ClickLi
     }
 
 
+    /****************************************************************************************
+     * ClickListener für die obere, freie Region in dieser List-View
+     ***************************************************************************************/
     @Override
     public void onTopEmptyRegionClick(){
         Toast.makeText(this, "Wähle deine Aktivitäts aus!", Toast.LENGTH_SHORT).show();
     }
 
 
+    /*****************************************************************************************
+     * Adapter-Klasse: verbindet ChooseActivity mit WearableListView
+     ****************************************************************************************/
     private static final class Adapter extends WearableListView.Adapter {
         private String[] mDataset;
         private final Context mContext;
         private final LayoutInflater mInflater;
 
-        // Provide a suitable constructor (depends on the kind of dataset)
+        // Konstruktor (hier passend für oberen String Datensatz)
         public Adapter(Context context, String[] dataset) {
             mContext = context;
             mInflater = LayoutInflater.from(context);
             mDataset = dataset;
         }
 
-        // Provide a reference to the type of views you're using
+        // Zuordnung zu verwendeten View Arten
         public static class ItemViewHolder extends WearableListView.ViewHolder {
             private TextView textView;
 
             public ItemViewHolder(View itemView) {
                 super(itemView);
-                // find the text view within the custom item's layout
+                // Finden/Zuordnen des TextViews im Custom-Item-Layout
                 textView = (TextView) itemView.findViewById(R.id.name);
             }
         }
 
-        // Create new views for list items
-        // (invoked by the WearableListView's layout manager)
+
+
+        /*********************************************************************************
+         * Erstellt neue Views für die Listen-Elemente / -Items
+         * (aufgerufen durch WearableListView's Layout Manager
+         * @param parent
+         * @param viewType
+         * @return erzeugt Listenelement nach Custom Layout und gibt View wieder
+         *********************************************************************************/
         @Override
         public WearableListView.ViewHolder onCreateViewHolder(ViewGroup parent,
                                                           int viewType) {
-            // Inflate our custom layout for list items
+            // erzeugt (unser) Custom Layout für Listenelemente
             return new ItemViewHolder(mInflater.inflate(R.layout.chooseactivity_item_layout, null));
         }
 
-        // Replace the contents of a list item
-        // Instead of creating new views, the list tries to recycle existing ones
-        // (invoked by the WearableListView's layout manager)
+
+        /**********************************************************************************
+         * Ersetzt den Inhalt eines Listenelements /-items
+         * anstatt neue Views zu erzeugen, versucht Liste bestehende Views wiederzuverwenden
+         * @param holder
+         * @param position
+         **********************************************************************************/
         @Override
         public void onBindViewHolder(WearableListView.ViewHolder holder,
                                  int position) {
-            // retrieve the text view
+            // Abrufen des Text Views
             ItemViewHolder itemHolder = (ItemViewHolder) holder;
             TextView view = itemHolder.textView;
-            // replace text contents
+            // Ersetzen des Textinhalts
             view.setText(mDataset[position]);
-            // replace list item's metadata
+            // Ersetzen von Metadaten der List-Items
             holder.itemView.setTag(position);
         }
 
-        // Return the size of your dataset
-        // (invoked by the WearableListView's layout manager)
+
+        /**********************************************************************************
+         * @return Listengröße bzw. Anzahl der Listenelemente
+         *********************************************************************************/
         @Override
         public int getItemCount() {
             return mDataset.length;

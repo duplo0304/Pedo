@@ -11,9 +11,9 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-/**
- * Created by SL_duplo on 28.01.15.
- */
+/********************************************************************************************
+ *  Countdown-Activity: zaehlt von 10 abwärts, danach beginnt das Training
+ *******************************************************************************************/
 public class CountdownActivity extends Activity implements View.OnClickListener {
 
     private CountDownTimer countDownTimer;
@@ -90,6 +90,7 @@ public class CountdownActivity extends Activity implements View.OnClickListener 
 
     }
 
+
     private void startTraining() {
         // nach Beenden den Countdowns wird TrainingLaufenActivity gestartet
         // gleichzeitig wird mit finish() diese CountDownActivity beendet / entfernt
@@ -120,30 +121,6 @@ public class CountdownActivity extends Activity implements View.OnClickListener 
 
     }
 
-/*
-    class BackgroundColorThread extends Thread {
-
-        public void run(){
-            while (true) {
-                try {
-                    Thread.sleep(intervall);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                currentColor++;
-                if (currentColor > COLORS.length-1){
-                    currentColor = 0;
-                }
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        rl.setBackgroundColor(COLORS[currentColor]);
-                    }
-                });
-            }
-        }
-
-    }*/
 
 
 }

@@ -15,6 +15,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
+/********************************************************************************************
+ *  Aktivitaet: Laufen
+ *******************************************************************************************/
 public class TrainingLaufen extends Activity {
 
     private ViewPager mPager;
@@ -49,7 +52,11 @@ public class TrainingLaufen extends Activity {
         editor.commit();
     }
 
-
+    /*******************************************************************************************
+     *  Generiert die Sichten, indem...
+     *  --> einzelne Fragments werden zur MainActivity hinzugefügt.
+     *  --> Fragments werden den Page-Indikatoren zugeordnet.
+     *******************************************************************************************/
     private void setupViews() {
         mPager = (ViewPager) findViewById(R.id.pager);
         mFirstIndicator = (ImageView) findViewById(R.id.indicator_0);
@@ -90,9 +97,10 @@ public class TrainingLaufen extends Activity {
         mPager.setAdapter(adapter);
     }
 
-    /**
-     * Sets the page indicator for the ViewPager.
-     */
+    /*******************************************************************************************
+     *  Setzt den Page-Indikator für den ViewPager.
+     *  Sichtbar unten als Navigationsleiste.
+     *******************************************************************************************/
     private void setIndicator(int i) {
         switch (i) {
             case 0:

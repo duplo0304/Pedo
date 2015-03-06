@@ -36,16 +36,25 @@ public class WearableListItemLayout extends LinearLayout
         mChosenCircleColor = getResources().getColor(R.color.blue);
     }
 
-    // Get references to the icon and text in the item layout definition
+
+    /*******************************************************************************************
+     *  Herstellen der Referenz für Icon und Text; gesetzt in Item-Layout Definition
+     *******************************************************************************************/
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        // These are defined in the layout file for list items
-        // (see next section)
+        // Finden entsprechender Views in Layout-File über ID
         mCircle = (ImageView) findViewById(R.id.circle);
         mName = (TextView) findViewById(R.id.name);
     }
 
+
+    /******************************************************************************************
+     *  Methoden für Animation der WearableListViews:
+     *  onCenterPosition() --> fokussiertes Element wird farblich hervorgehoben
+     *  onNonCenterPosition() --> nicht-fokussierte Elemente wird grau gesetzt
+     *  @param animate
+     *****************************************************************************************/
     @Override
     public void onCenterPosition(boolean animate) {
         mName.setAlpha(1f);

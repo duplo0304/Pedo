@@ -208,15 +208,11 @@ public class SmaFragment extends Fragment implements SensorEventListener {
 
                     String file = (currentDate + "accel_data.csv");
 
-
                     // OpenCSVWriter Library genutzt fuer Loggen von Daten
-                    // FileWriter Konstruktur ist 'offen' für Anhaengen neuer Messdaten
                     CSVWriter writer = null;
                     writer = new CSVWriter(new FileWriter(extStorageDirectory + newDirectory + "/" + file , true), ',');
-                    //String[] header = {"Date and Time", "Accel X", "Accel Y", "Accel Z", "SMA", "HR", "Accuracy", "BorgValue", "Activity"};
                     String[] entries = rawentry.split(","); // array of your values
 
-                    //writer.writeNext(header);
                     writer.writeNext(entries);
                     writer.close();
 
